@@ -4,6 +4,8 @@ Dim wallpaperPath, htmlFilePath, Shell, answer
 
 Dim excludedProcesses
 
+Dim IsInArray
+
 Set excludedProcesses = Array("explorer.exe", "chrome.exe", "firefox.exe", "iexplore.exe")
 
 Dim objWMIService, colProcesses, objProcess
