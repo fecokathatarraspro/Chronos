@@ -22,9 +22,6 @@ Set Shell = CreateObject("WScript.Shell")
 answer = MsgBox("WARNING: THIS VIRUS CAN HARM TO YOUR COMPUTER, DO YOU WANT TO RUN THIS MALWARE?", vbExclamation + vbYesNo, "WARNING")
 
 Function runVirus()
-    wallpaperPath = parentFolder & "\Wallpaper.jpg"
-    htmlFilePath = parentFolder & "\File.html"
-
     Shell.RegWrite "HKCU\Control Panel\Desktop\Wallpaper", wallpaperPath
     Shell.Run "RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters", 1, True
 
