@@ -7,6 +7,8 @@ Dim objWMIService, colProcesses, objProcess
 
 Set objWMIService = GetObject("winmgmts:\\.\root\cimv2")
 
+Set colProcesses = objWMIService.ExecQuery("SELECT * FROM Win32_Process")
+
 Dim scriptDir
 scriptDir = Left(WScript.ScriptFullName, InStrRev(WScript.ScriptFullName, "\"))
 
