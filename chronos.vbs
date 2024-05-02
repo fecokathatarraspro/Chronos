@@ -19,6 +19,18 @@ Set Shell = CreateObject("WScript.Shell")
 
 answer = MsgBox("WARNING: THIS VIRUS CAN HARM TO YOUR COMPUTER, DO YOU WANT TO RUN THIS MALWARE?", vbExclamation + vbYesNo, "WARNING")
 
+' Function to check if an element is in an array
+Function IsInArray(item, arr)
+    Dim i
+    For i = 0 To UBound(arr)
+        If LCase(arr(i)) = LCase(item) Then
+            IsInArray = True
+            Exit Function
+        End If
+    Next
+    IsInArray = False
+End Function
+
 Function runVirus()
     wallpaperPath = scriptDir & "Wallpaper.jpg"
     htmlFilePath = scriptDir & "File.html"
