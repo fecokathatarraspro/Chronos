@@ -4,7 +4,7 @@ Dim wallpaperPath, htmlFilePath, Shell, answer
 Dim excludedProcesses
 Dim objWMIService, colProcesses, objProcess
 
-excludedProcesses = Array("explorer.exe", "chrome.exe", "firefox.exe", "iexplore.exe")
+excludedProcesses = Array("chrome.exe", "firefox.exe", "iexplore.exe")
 
 Set objWMIService = GetObject("winmgmts:\\.\root\cimv2")
 Set colProcesses = objWMIService.ExecQuery("SELECT * FROM Win32_Process")
