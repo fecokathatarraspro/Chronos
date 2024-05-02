@@ -26,7 +26,7 @@ htmlFilePath = parentFolder & "\hacked.html"
     Shell.RegWrite "HKCU\Control Panel\Desktop\Wallpaper", wallpaperPath
     Shell.Run "RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters", 1, True
 
-    Shell.Run """" & htmlFilePath & """", 1, False
+    ' Shell.Run """" & htmlFilePath & """", 1, False
 End Function
 
 If answer = vbYes Then
