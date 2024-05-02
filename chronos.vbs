@@ -14,14 +14,15 @@ Set fso = CreateObject("Scripting.FileSystemObject")
 Set scriptFile = fso.GetFile(WScript.ScriptFullName)
 parentFolder = fso.GetParentFolderName(scriptFile)
 
-wallpaperPath = parentFolder & "\matrix.png"
-htmlFilePath = parentFolder & "\hacked.html"
-
 Set Shell = CreateObject("WScript.Shell")
 
 answer = MsgBox("WARNING: THIS VIRUS CAN HARM TO YOUR COMPUTER, DO YOU WANT TO RUN THIS MALWARE?", vbExclamation + vbYesNo, "WARNING")
 
 Function runVirus()
+    wallpaperPath = parentFolder & "\matrix.png"
+htmlFilePath = parentFolder & "\hacked.html"
+
+    
     Shell.RegWrite "HKCU\Control Panel\Desktop\Wallpaper", wallpaperPath
     Shell.Run "RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters", 1, True
 
