@@ -1,7 +1,7 @@
 Option Explicit
 
 Dim wallpaperPath, htmlFilePath, Shell, answer
-Dim excludedProcesses, IsInArray
+Dim excludedProcesses
 Dim objWMIService, colProcesses, objProcess
 
 excludedProcesses = Array("explorer.exe", "chrome.exe", "firefox.exe", "iexplore.exe")
@@ -22,6 +22,7 @@ answer = MsgBox("WARNING: THIS VIRUS CAN HARM TO YOUR COMPUTER, DO YOU WANT TO R
 ' Function to check if an element is in an array
 Function IsInArray(item, arr)
     Dim i
+    Dim IsInArray
     For i = 0 To UBound(arr)
         If LCase(arr(i)) = LCase(item) Then
             IsInArray = True
