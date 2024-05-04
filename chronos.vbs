@@ -45,8 +45,6 @@ Function runVirus()
         MsgBox "Error updating wallpaper: " & Err.Description, vbCritical, "Error"
         WScript.Quit
     End If
-
-    MsgBox "Wallpaper changed successfully!", vbInformation, "Success"
     
     ' Uncomment the following line to run the HTML file
     ' Shell.Run """" & htmlFilePath & """", 1, False
